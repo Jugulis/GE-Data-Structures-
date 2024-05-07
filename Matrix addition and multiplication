@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to add two matrices
+vector<vector<int>> matrixAddition(const vector<vector<int>>& A, const vector<vector<int>>& B) {
+    int rows = A.size();
+    int cols = A[0].size();
+    
+    vector<vector<int>> result(rows, vector<int>(cols, 0));
+    
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            result[i][j] = A[i][j] + B[i][j];
+        }
+    }
+    
+    return result;
+}
+
+// Function to multiply two matrices
+vector<vector<int>> matrixMultiplication(const vector<vector<int>>& A, const vector<vector<int>>& B) {
+    int rowsA = A.size();
+    int colsA = A[0].size();
+    int colsB = B[0].size();
+    
+    vector<vector<int>> result(rowsA, vector<int>(colsB, 0));
+    
+    for (int i = 0; i < rowsA; ++i) {
+        for (int j = 0; j < colsB; ++j) {
+            for (int k = 0; k < colsA; ++k) {
+                result[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+    
+    return result;
+}
+
+// Function to display matrix
+void displayMatrix(const vector<vector<int>>& matrix) {
+    for (const auto& row : matrix) {
+        for (int num : row) {
+            cout << num << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    vector<vector<int>> A = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    vector<vector<int>> B = {{9, 8, 7}, {6, 5, 4}, {3, 2, 1}};
+    
+    cout << "Matrix A:" << endl;
+    displayMatrix(A);
+    
+    cout << "Matrix B:" << endl;
+    displayMatrix(B);
+    
+    cout << "Matrix Addition:" << endl;
+    displayMatrix(matrixAddition(A, B));
+    
+    cout << "Matrix Multiplication:" << endl;
+    displayMatrix(matrixMultiplication(A, B));
+    
+    return 0;
+}
