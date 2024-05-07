@@ -1,0 +1,56 @@
+#include <iostream>
+
+// Node structure for doubly linked list
+struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+};
+
+// Doubly linked list class
+class DoublyLinkedList {
+private:
+    Node* head;
+public:
+    DoublyLinkedList() {
+        head = nullptr;
+    }
+
+    // Function to insert a new node at the beginning
+    void insertAtBeginning(int newData) {
+        Node* newNode = new Node();
+        newNode->data = newData;
+        newNode->prev = nullptr;
+        newNode->next = head;
+
+        if (head != nullptr)
+            head->prev = newNode;
+
+        head = newNode;
+    }
+
+    // Function to display the list
+    void display() {
+        Node* temp = head;
+        while (temp != nullptr) {
+            std::cout << temp->data << " ";
+            temp = temp->next;
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    DoublyLinkedList dll;
+
+    // Inserting elements at the beginning
+    dll.insertAtBeginning(3);
+    dll.insertAtBeginning(5);
+    dll.insertAtBeginning(7);
+
+    // Displaying the list
+    std::cout << "Doubly Linked List: ";
+    dll.display();
+
+    return 0;
+}
